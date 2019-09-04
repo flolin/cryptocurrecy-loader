@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+      <groupId>com.flolin.playground</groupId>
+      <artifactId>cryptocurrenty-loader</artifactId>
+      <version>local</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+
+   <artifactId>core</artifactId>
+   <packaging>jar</packaging>
+
+   <dependencies>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-hazelcast</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-web-client</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-slf4j-impl</artifactId>
+         <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>com.lmax</groupId>
+         <artifactId>disruptor</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.google.guava</groupId>
+         <artifactId>guava</artifactId>
+         <version>27.0.1-jre</version>
+      </dependency>
+
+      <!-- test dependencies -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-unit</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.mockito</groupId>
+         <artifactId>mockito-core</artifactId>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>${maven.shade.plugin.version}</version>
+            <executions>
+               <execution>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>shade</goal>
+                  </goals>
+                  <configuration>
+                     <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                           <manifestEntries>
+                              <Main-Class>com.flolin.playground.app.AppLauncher</Main-Class>
+                              <Main-Verticle>com.flolin.playground.Bootstrap</Main-Verticle>
+                           </manifestEntries>
+                        </transformer>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                           <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>
+                        </transformer>
+                     </transformers>
+                     <artifactSet>
+                     </artifactSet>
+                     <outputFile>${project.build.directory}/${project.parent.artifactId}-fat.jar</outputFile>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <!-- JIB -->
+         <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <configuration>
+               <skip>true</skip> <!-- do not use for now -->
+               <from>
+                  <image>openjdk:11</image>
+               </from>
+               <to>
+                  <image>cryptocurrency-loader</image>
+                  <!--image>gcr.io/my-gcp-project/my-app</image> docker-credential-gcr -->
+               </to>
+               <container>
+                  <jvmFlags>
+                     <jvmFlag>-Xms256m</jvmFlag>
+                  </jvmFlags>
+                  <args>
+                     <arg>some</arg>
+                     <arg>args</arg>
+                  </args>
+                  <ports>
+                     <port>8080</port>
+                  </ports>
+               </container>
+            </configuration>
+            <executions>
+               <execution>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>build</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+
+   <reporting>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </reporting>
+
+</project>

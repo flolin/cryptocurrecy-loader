@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+      <groupId>com.flolin.playground</groupId>
+      <artifactId>cryptocurrenty-loader</artifactId>
+      <version>local</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+
+   <artifactId>test-acceptance</artifactId>
+   <packaging>jar</packaging>
+
+   <dependencies>
+      <dependency>
+         <groupId>com.flolin.playground</groupId>
+         <artifactId>cryptocurrenty-loader</artifactId>
+         <version>local</version>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-hazelcast</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-web-client</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-slf4j-impl</artifactId>
+         <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>com.google.guava</groupId>
+         <artifactId>guava</artifactId>
+         <version>27.0.1-jre</version>
+      </dependency>
+
+      <!-- test dependencies -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-unit</artifactId>
+         <version>3.7.1</version>
+      </dependency>
+   </dependencies>
+</project>

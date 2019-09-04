@@ -1,0 +1,12 @@
+.idea/
+*.iml
+*.ipr
+*.iws
+*~
+target/
+*.log
+*.key
+
+*.credentials
+cryptocompare.cred
+app-config-*.json

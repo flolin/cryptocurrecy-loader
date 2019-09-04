@@ -1,0 +1,12 @@
+{
+  "cryptoCurrencyLoaderService": {
+    "host": "0.0.0.0",
+    "port": 8080
+  },
+
+  "apiDataProvider": {
+    "endpoint": "https://min-api.cryptocompare.com/data/price?fsym={TARGET_CUR}&tsyms=EUR",
+    "apiKey": "MY_OWN_KEY"
+  }
+}
+
