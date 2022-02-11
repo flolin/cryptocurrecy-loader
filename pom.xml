@@ -19,7 +19,7 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
       <!--Dependency versions-->
-      <vertx.version>3.7.0</vertx.version>
+      <vertx.version>3.9.4</vertx.version>
       <junit.version>4.12</junit.version>
       <log4j2.version>2.7</log4j2.version>
       <powermock.version>2.0.0</powermock.version>
